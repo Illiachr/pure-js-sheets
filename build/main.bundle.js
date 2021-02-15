@@ -1,1 +1,1 @@
-console.log("pure js sheets");
+(()=>{"use strict";console.log("pure js sheets")})();
