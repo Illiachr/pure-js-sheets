@@ -1,0 +1,30 @@
+{
+  "name": "js-sheets",
+  "version": "1.0.0",
+  "description": "pure js sheets",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack --mode=development",
+    "build": "webpack --mode=production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Illiachr/pure-js-sheets.git"
+  },
+  "keywords": [
+    "js",
+    "html",
+    "css",
+    "scss"
+  ],
+  "author": "Illia Cherkasov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Illiachr/pure-js-sheets/issues"
+  },
+  "homepage": "https://github.com/Illiachr/pure-js-sheets#readme",
+  "devDependencies": {
+    "webpack": "^5.22.0",
+    "webpack-cli": "^4.5.0"
+  }
+}
