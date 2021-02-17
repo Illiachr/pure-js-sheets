@@ -1,0 +1,17 @@
+@import "variables";
+@import "mixins";
+
+.excel__tollbar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: $toolbar-height;
+  border-top: $border;
+  border-bottom: $border;
+  padding: 7px 10px;
+  display: flex;
+
+  & .button {
+    @include button();
+  }
+}
