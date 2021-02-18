@@ -5,6 +5,6 @@ export default class Formula extends SheetComponent {
   static className = 'excel__formula';
 
   toHTML() {
-    return `<h2 class="${this.className}">Formula</h2>`;
+    return `<h2>Formula</h2>`;
   }
 }

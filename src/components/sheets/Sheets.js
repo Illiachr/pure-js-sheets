@@ -10,8 +10,10 @@ export default class Sheets {
     $root.classList.add('excel');
     this.components.forEach((Component) => {
       const $el = document.createElement('div');
+      $el.classList.add(Component.className);
       const component = new Component($el);
-      $root.insertAdjacentHTML('beforeend', component.toHTML());
+      $el.innerHTML = component.toHTML();
+      $root.append($el);
     });
 
     return $root;

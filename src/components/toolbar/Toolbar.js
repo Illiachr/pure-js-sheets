@@ -2,7 +2,7 @@
 import SheetComponent from '@core/SheetComponent';
 
 export default class Toolbar extends SheetComponent {
-  static className = 'excel__toolbar';
+  static className = 'excel__tollbar';
 
   toHTML() {
     return '<h2>Toolbar</h2>';

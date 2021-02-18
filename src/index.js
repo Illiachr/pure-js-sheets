@@ -9,9 +9,4 @@ const sheets = new Sheets('#app', {
   components: [Header, Toolbar, Formula, Table]
 });
 
-const sheetsSecond = new Sheets('#app', {
-  components: [Header, Toolbar, Formula]
-});
-
 sheets.render();
-sheetsSecond.render();
