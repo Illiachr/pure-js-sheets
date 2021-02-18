@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+  <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
+  <title>JS Sheets</title>
+</head>
+<body>
+  <div class="container" id="app">
+    <div class="excel">
+      <div class="excel__header">
+        <input type="text" class="input" value="Новая таблица" />
+        <div class="">
+          <div class="button">
+            <span class="material-icons">exit_to_app</span>
+          </div>
+          <div class="button">
+            <span class="material-icons">delete</span>
+          </div>
+        </div>
+      </div>
+      <!-- /.excel__header -->
+      <div class="excel__tollbar">
+        <div class="button">
+          <span class="material-icons">format_align_left</span>
+        </div>
+        <div class="button">
+          <span class="material-icons">format_align_right</span>
+        </div>
+        <div class="button">
+          <span class="material-icons">format_align_center</span>
+        </div>
+        <div class="button">
+          <span class="material-icons">format_bold</span>
+        </div>
+        <div class="button">
+          <span class="material-icons">format_italic</span>
+        </div>
+        <div class="button">
+          <span class="material-icons">format_underline</span>
+        </div>
+      </div>
+      <!-- /.excel__tollbar -->
+      <div class="excel__formula">
+        <div class="formula-info">fx</div>
+        <div class="formula-input" contenteditable="true" spellcheck="false"></div>
+      </div>
+      <!-- /.excel__formula -->
+      <div class="excel__table">
+        <div class="table-row">
+          <div class="table-row-info"></div>
+          <div class="row-data">
+            <div class="table-column">A</div>
+            <div class="table-column">B</div>
+            <div class="table-column">C</div>
+          </div>
+        </div>
+        <div class="table-row">
+          <div class="table-row-info">1</div>
+          <div class="row-data">
+            <div class="cell selected" contenteditable="true">A1</div>
+            <div class="cell" contenteditable="true">B1</div>
+            <div class="cell" contenteditable="true">C1</div>
+          </div>
+        </div>
+        <div class="table-row">
+          <div class="table-row-info">2</div>
+          <div class="row-data">
+            <div class="cell selected" contenteditable="true">A2</div>
+            <div class="cell" contenteditable="true">B2</div>
+            <div class="cell" contenteditable="true">C2</div>
+          </div>
+        </div>
+        <!-- /.table-row -->
+      </div>
+      <!-- /.excel__table -->
+    </div>
+  </div>
+  <!-- /#app.container -->
+</body>
+</html>
