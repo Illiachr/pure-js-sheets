@@ -1,4 +1,3 @@
-/* eslint-disable require-jsdoc */
 class Dom {
   constructor(selector) {
     // #app
@@ -18,6 +17,19 @@ class Dom {
 
   clear() {
     this.html('');
+    return this;
+  }
+
+  append(node) {
+    if (node instanceof Dom) {
+      node = node.$el;
+    }
+    if (Element.prototype.append) {
+      this.$el.append(node);
+    } else {
+      this.$el.appenChild(node);
+    }
+
     return this;
   }
 }

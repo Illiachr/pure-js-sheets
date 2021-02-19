@@ -61,7 +61,7 @@ module.exports = (env, argv) => {
       open: true,
       // hot: true,
       watchContentBase: true,
-      compress: true,
+      // compress: true,
       overlay: true,
       writeToDisk: false,
       historyApiFallback: true,
