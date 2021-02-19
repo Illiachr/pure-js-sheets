@@ -10,7 +10,10 @@ module.exports = {
   },
   'extends': ['eslint:recommended', 'google'],
   'rules': {
+    'arrow-parents': 'off',
     'comma-dangle': 'off',
+    'require-jsdoc': 'off',
+    'operator-linebreak': 'off',
     'linebreak-style': [
       'error',
       'windows'
