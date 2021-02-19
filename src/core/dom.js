@@ -20,8 +20,8 @@ class Dom {
     return this;
   }
 
-  on() {
-
+  on(listener, handler) {
+    this.$el.addEventListener(listener, handler);
   }
 
   append(node) {
