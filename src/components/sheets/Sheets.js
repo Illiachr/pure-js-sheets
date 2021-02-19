@@ -1,3 +1,5 @@
+import {$} from '../../core/dom';
+
 /* eslint-disable require-jsdoc */
 export default class Sheets {
   constructor(selector, options) {
@@ -9,8 +11,7 @@ export default class Sheets {
     const $root = document.createElement('div');
     $root.classList.add('excel');
     this.components.forEach((Component) => {
-      const $el = document.createElement('div');
-      $el.classList.add(Component.className);
+      const $el = $.create('div', Component.className);
       const component = new Component($el);
       $el.innerHTML = component.toHTML();
       $root.append($el);

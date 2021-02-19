@@ -5,6 +5,10 @@ export default class Formula extends SheetComponent {
   static className = 'excel__formula';
 
   toHTML() {
-    return `<h2>Formula</h2>`;
+    return `
+      <div class="formula-info">fx</div>
+      <div class="formula-input" contenteditable="true" spellcheck="false">
+      </div>
+    `;
   }
 }
