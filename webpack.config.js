@@ -59,11 +59,11 @@ module.exports = (env, argv) => {
     devServer: {
       port: '3000',
       open: true,
-      hot: true,
-      // watchContentBase: true,
-      compress: true,
+      // hot: true,
+      watchContentBase: true,
+      // compress: true,
       overlay: true,
-      writeToDisk: true,
+      writeToDisk: false,
       historyApiFallback: true,
     },
     plugins: plugins(),
@@ -84,7 +84,8 @@ module.exports = (env, argv) => {
           use: {
             loader: 'babel-loader',
             options: {
-              presets: ['@babel/preset-env']
+              presets: ['@babel/preset-env'],
+              // plugins: ['@babel/plugin-proposal-class-properties']
             }
           }
         },
