@@ -26,3 +26,16 @@
   margin: 0;
   padding: 0;
 }
+
+@mixin resize-elem {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: $primary-color;
+  opacity: 0;
+  transition: all .2s ease;
+
+  &:hover {
+    opacity: 1;
+  }
+}
