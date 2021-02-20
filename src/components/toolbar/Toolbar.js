@@ -4,6 +4,13 @@ import SheetComponent from '@core/SheetComponent';
 export default class Toolbar extends SheetComponent {
   static className = 'excel__tollbar';
 
+  constructor($root) {
+    super($root, {
+      name: 'Toolbar',
+      listeners: ['click']
+    });
+  }
+
   toHTML() {
     return `
       <div class="button">
@@ -25,5 +32,12 @@ export default class Toolbar extends SheetComponent {
         <span class="material-icons">format_underline</span>
       </div>
     `;
+  }
+
+  onClick(event) {
+    const {target} = event;
+    if (target.closest('span')) {
+      console.log('Toolbar', target);
+    }
   }
 }

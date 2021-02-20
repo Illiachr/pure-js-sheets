@@ -25,4 +25,11 @@ export default class Sheets {
       component.init();
     });
   }
+
+  destroy() {
+    this.components.forEach(component => {
+      console.log(component);
+      component.destruct();
+    });
+  }
 }

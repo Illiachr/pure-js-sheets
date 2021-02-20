@@ -24,6 +24,10 @@ class Dom {
     this.$el.addEventListener(listener, handler);
   }
 
+  off(listener, handler) {
+    this.$el.removeEventListener(listener, handler);
+  }
+
   append(node) {
     if (node instanceof Dom) {
       node = node.$el;

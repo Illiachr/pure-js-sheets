@@ -14,14 +14,18 @@ export default class DomListener {
     this.listeners.forEach(listener => {
       const method = getMethodName(listener);
       if (!this[method]) {
-        throw new Error(`Method ${method} must be implemented at ${this.name}`);
+        throw new Error(`Method ${method} must be implemented in ${this.name}`);
       }
-      this.$root.on(listener, this[method].bind(this));
+      this[method].bind(this);
+      this.$root.on(listener, this[method]);
     });
   }
 
   removeDOMListeners() {
-    // must be implemented
+    this.listeners.forEach(listener => {
+      const method = getMethodName(listener);
+      this.$root.off(listener, this[method]);
+    });
   }
 } // end DomListener
 

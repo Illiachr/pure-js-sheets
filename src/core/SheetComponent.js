@@ -14,4 +14,8 @@ export default class SheetComponent extends DomListener {
   init() {
     this.initDOMListeners();
   }
+
+  destruct() {
+    this.removeDOMListeners();
+  }
 }
