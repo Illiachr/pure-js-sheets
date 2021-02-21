@@ -28,6 +28,31 @@ class Dom {
     this.$el.removeEventListener(listener, handler);
   }
 
+  get data() {
+    return this.$el.dataset;
+  }
+
+  setStyle(value) {
+    this.$el.style.cssText = value;
+  }
+
+  css(styles = {}) {
+    Object.keys(styles)
+        .forEach(key => this.$el.style[key] = `${styles[key]}`);
+  }
+
+  findAll(selector) {
+    return this.$el.querySelectorAll(selector);
+  }
+
+  closest(selector) {
+    return $(this.$el.closest(selector));
+  }
+
+  getCoordinats() {
+    return this.$el.getBoundingClientRect();
+  }
+
   append(node) {
     if (node instanceof Dom) {
       node = node.$el;
