@@ -1,33 +1,6 @@
-import SheetComponent from '@core/SheetComponent';
 import {$} from '@core/dom';
-import {createTable} from './tableTemplate';
 
-export default class Table extends SheetComponent {
-  static className = 'excel__table';
-
-  constructor($root) {
-    super($root, {
-      name: Table,
-      listeners: ['mousedown'],
-    });
-  }
-
-  toHTML() {
-    return createTable();
-  }
-
-  onMousedown(event) {
-    // 680 ms  Scripting
-    // 608 ms  Rendering
-
-    event.preventDefault();
-    if (event.target.dataset.resize) {
-      resizeHandler(this, event.target);
-    } // end if resize
-  }
-}
-
-const resizeHandler = ($root, $target) => {
+export const resizeHandler = ($root, $target) => {
   const $resizer = $($target);
   const $parent = $resizer.closest('[data-type="resizable"]');
   const coords = $parent.getCoordinats();
@@ -45,7 +18,7 @@ const resizeHandler = ($root, $target) => {
               : null;
   let value = '';
 
-  document.onmousemove = e => {
+  const mouseMoveHandler = e => {
     if (direction === 'col') {
       const delta = e.pageX - coords.right;
       value = `${coords.width + delta}px`;
@@ -55,9 +28,9 @@ const resizeHandler = ($root, $target) => {
       value = `${coords.height + delta}px`;
       $resizer.css({transform: `translateY(${delta}px)`});
     }
-  };
+  }; // end moveHandler
 
-  document.onmouseup = () => {
+  const mouseUpHandler = () => {
     document.onmousemove = null;
     document.onmouseup = null;
     $resizer.css({
@@ -72,5 +45,8 @@ const resizeHandler = ($root, $target) => {
     } else {
       $parent.css({height: value});
     }
-  };
+  }; // end mouseUpHandler
+
+  document.onmousemove = mouseMoveHandler;
+  document.onmouseup = mouseUpHandler;
 }; // end resizeHandler

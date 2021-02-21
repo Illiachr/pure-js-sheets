@@ -16,6 +16,7 @@
   }
   & .table-row-info {
     display: flex;
+    position: relative;
     justify-content: center;
     align-items: center;
     min-width: $info-cell-width;
@@ -29,6 +30,7 @@
   }
   & .table-column {
     display: flex;
+    position: relative;
     justify-content: center;
     align-items: center;
     background: #f8f9fa;
@@ -52,8 +54,30 @@
 
     &.selected {
       border: 0;
-      outline: 2px solid #3c74ff;
+      outline: 2px solid $primary-color;
       z-index: 2;
     }
+
+    &.resize-col {
+      border-right-color: $primary-color;
+    }
+
+    &.resize-row {
+      border-bottom-color: $primary-color;
+    }
+  }
+
+  .row-resize {
+    @include resize-elem;
+    left: 0;
+    height: 4px;
+    cursor: row-resize;
+  }
+
+  .col-resize {
+    @include resize-elem;
+    top: 0;
+    width: 4px;
+    cursor: col-resize;
   }
 }
