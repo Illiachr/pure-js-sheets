@@ -7,12 +7,13 @@ export default class TableSelection {
 
   select($el) {
     this.clear();
+    $el.addClass(TableSelection.className);
+    this.$group.push($el);
     this.current = $el;
-    this.$group.push(this.current);
-    this.current.addClass(TableSelection.className);
   }
 
   selectGroup($group) {
+    console.log($group);
     this.clear();
     this.$group = $group;
     this.$group.forEach($el => $el.addClass(TableSelection.className));

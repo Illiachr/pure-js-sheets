@@ -10,8 +10,7 @@ export function getRange(start, end) {
     [end, start] = [start, end];
   }
 
-  const len = end - start + 1;
-  return new Array(len)
+  return new Array(end - start + 1)
       .fill('')
-      .map((_, i) => i);
+      .map((_, i) => start + i);
 }

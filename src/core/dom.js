@@ -36,8 +36,8 @@ class Dom {
     if (parse) {
       const parsed = this.data.id.split(':');
       return {
-        row: parsed[0],
-        col: parsed[1]
+        row: +parsed[0],
+        col: +parsed[1]
       };
     }
     return this.data.id;
