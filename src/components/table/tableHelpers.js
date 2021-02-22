@@ -5,3 +5,7 @@ export function isResizable(event) {
 export function isCell(event) {
   return event.target.dataset.type === 'cell';
 }
+
+export function matrix($target) {
+
+}

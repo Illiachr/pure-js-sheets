@@ -4,6 +4,7 @@ import {isCell, isResizable} from './tableHelpers';
 import TableSelection from './TableSelection';
 import {createTable} from './tableTemplate';
 import {$} from '@core/dom';
+import {getRange} from '../../core/utils';
 
 export default class Table extends SheetComponent {
   static className = 'excel__table';
@@ -21,7 +22,7 @@ export default class Table extends SheetComponent {
 
   init() {
     super.init();
-    const $cell = this.$root.find('[data-id="1:0"]');
+    const $cell = this.$root.find('[data-id="0:0"]');
     this.tableSelection.select($cell);
   }
 
@@ -32,22 +33,22 @@ export default class Table extends SheetComponent {
   onMousedown(event) {
     if (isCell(event)) {
       const $cell = $(event.target);
-      this.tableSelection.select($cell);
-      // console.log(event);
       if (event.shiftKey) {
-        console.log('shiftKey');
-        document.onmouseover = e => {
-          this.tableSelection.selectGroup($(e.target));
-        };
+        // group selection
+        const target = $(event.target).id(true);
+        const current = this.tableSelection.current.id(true);
+        const cols = getRange(current.col, target.col);
+        console.log(target);
+        console.log(current);
+        console.log(cols);
+      } else {
+        // single selection
+        this.tableSelection.select($cell);
       }
-      document.onmouseup = () => {
-        document.onmouseover = null;
-        document.onmouseup = null;
-      };
     }
     if (isResizable(event)) {
       resizeHandler(this.$root, event.target);
-    } // end if resize
+    }
   }
 }
 

@@ -57,12 +57,12 @@ export function createTable(rowNum = 20) {
       .map(toCol)
       .join('');
   rows.push(createRow(cols));
-  for (let row = 1; row <= rowNum; row++) {
+  for (let row = 0; row < rowNum; row++) {
     const cells = new Array(colCount)
         .fill('')
         .map(toCell(row))
         .join('');
-    rows.push(createRow(cells, row));
+    rows.push(createRow(cells, row + 1));
   }
 
   return rows.join('');
