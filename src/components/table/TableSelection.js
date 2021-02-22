@@ -10,8 +10,9 @@ export default class TableSelection {
     $el.addClass(TableSelection.className);
   }
 
-  selectGroup() {
-
+  selectGroup($el) {
+    this.$group.push($el);
+    console.log(this.$group);
   }
 
   clear() {

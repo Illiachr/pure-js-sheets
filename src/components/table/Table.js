@@ -22,7 +22,6 @@ export default class Table extends SheetComponent {
   init() {
     super.init();
     const $cell = this.$root.find('[data-id="1:0"]');
-    console.log($cell);
     this.tableSelection.select($cell);
   }
 
@@ -34,6 +33,17 @@ export default class Table extends SheetComponent {
     if (isCell(event)) {
       const $cell = $(event.target);
       this.tableSelection.select($cell);
+      // console.log(event);
+      if (event.shiftKey) {
+        console.log('shiftKey');
+        document.onmouseover = e => {
+          this.tableSelection.selectGroup($(e.target));
+        };
+      }
+      document.onmouseup = () => {
+        document.onmouseover = null;
+        document.onmouseup = null;
+      };
     }
     if (isResizable(event)) {
       resizeHandler(this.$root, event.target);
@@ -44,5 +54,6 @@ export default class Table extends SheetComponent {
 
 // 680 ms  Scripting
 // 608 ms  Rendering
+
 // 149 ms  Scripting
 // 394 ms  Rendering
