@@ -57,29 +57,19 @@ export default class Table extends SheetComponent {
       let currRow = id.row;
       let currCol = id.col;
 
-      switch (keyCode) {
-        case (keyCode === 13 || keyCode === 40):
-          console.log('go next down');
-          break;
-      }
-
       if (keyCode === 13 || keyCode === 40) {
         currRow += 1;
       }
 
       if (keyCode === 38) {
-        console.log('go next up');
-
         currRow -= 1;
       }
 
       if (keyCode === 9 || keyCode === 39) {
-        console.log('go next right');
         currCol += 1;
       }
 
       if (keyCode === 37) {
-        console.log('go next left');
         currCol -= 1;
       }
 
