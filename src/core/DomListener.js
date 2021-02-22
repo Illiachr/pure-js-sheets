@@ -10,13 +10,12 @@ export default class DomListener {
   }
 
   initDOMListeners() {
-    console.log(this.listeners);
     this.listeners.forEach(listener => {
       const method = getMethodName(listener);
       if (!this[method]) {
         throw new Error(`Method ${method} must be implemented in ${this.name}`);
       }
-      this[method].bind(this);
+      this[method] = this[method].bind(this);
       this.$root.on(listener, this[method]);
     });
   }

@@ -20,12 +20,12 @@ class Dom {
     return this;
   }
 
-  on(listener, handler) {
-    this.$el.addEventListener(listener, handler);
+  on(eventType, handler) {
+    this.$el.addEventListener(eventType, handler);
   }
 
-  off(listener, handler) {
-    this.$el.removeEventListener(listener, handler);
+  off(eventType, handler) {
+    this.$el.removeEventListener(eventType, handler);
   }
 
   get data() {
@@ -39,6 +39,18 @@ class Dom {
   css(styles = {}) {
     Object.keys(styles)
         .forEach(key => this.$el.style[key] = `${styles[key]}`);
+  }
+
+  addClass(className) {
+    this.$el.classList.add(className);
+  }
+
+  rmClass(className) {
+    this.$el.classList.remove(className);
+  }
+
+  find(selector) {
+    return $(this.$el.querySelector(selector));
   }
 
   findAll(selector) {

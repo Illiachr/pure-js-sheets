@@ -14,7 +14,7 @@ export const resizeHandler = ($root, $target) => {
 
   const colIndex = direction === 'col' ? $parent.data.col : null;
   const $cells = direction === 'col'
-              ? $root.querySelectorAll(`[data-col="${colIndex}"]`)
+              ? $root.findAll(`[data-col="${colIndex}"]`)
               : null;
   let value = '';
 
