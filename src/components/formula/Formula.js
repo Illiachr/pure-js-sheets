@@ -3,10 +3,11 @@ import SheetComponent from '@core/SheetComponent';
 export default class Formula extends SheetComponent {
   static className = 'excel__formula';
 
-  constructor($root) {
+  constructor($root, options) {
     super($root, {
       name: 'Formula',
-      listeners: ['input', 'click']
+      listeners: ['input', 'click', 'keydown'],
+      ...options
     });
   }
 
@@ -20,8 +21,16 @@ export default class Formula extends SheetComponent {
 
   onInput(event) {
     const {target} = event;
-    console.log(this.$root);
-    console.log('Formula: onInput', target.textContent);
+    const text = target.textContent;
+    this.$emit('formula:input', text);
+  }
+
+  onKeydown(e) {
+    const {key} = e;
+    if (key === 'Enter') {
+      e.preventDefault();
+      this.$emit('formula:end', null);
+    }
   }
 
   onClick(event) {

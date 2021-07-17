@@ -4,14 +4,16 @@ import {isCell, isResizable, matrix} from './tableHelpers';
 import TableSelection from './TableSelection';
 import {createTable} from './tableTemplate';
 import {$} from '@core/dom';
+import {nextSelector} from '@core/utils';
 
 export default class Table extends SheetComponent {
   static className = 'excel__table';
 
-  constructor($root) {
+  constructor($root, options) {
     super($root, {
-      name: Table,
+      name: 'Table',
       listeners: ['mousedown', 'keydown'],
+      ...options
     });
   }
 
@@ -23,6 +25,13 @@ export default class Table extends SheetComponent {
     super.init();
     const $cell = this.$root.find('[data-id="0:0"]');
     this.tableSelection.select($cell);
+    this.$on('formula:input', text => {
+      this.tableSelection.current.text(text);
+    });
+    this.$on('formula:end', () => {
+      this.tableSelection.current.focus();
+      console.log(this.tableSelection.current);
+    });
   }
 
   toHTML() {
@@ -49,39 +58,29 @@ export default class Table extends SheetComponent {
   }
 
   onKeydown(event) {
-    event.preventDefault();
-    if (isCell(event)) {
-      const {keyCode} = event;
-      const currCell = $(event.target);
-      const id = currCell.id(true);
-      let currRow = id.row;
-      let currCol = id.col;
+    const keys = [
+      'Enter',
+      'Tab',
+      'ArrowLeft',
+      'ArrowUp',
+      'ArrowRight',
+      'ArrowDown',
+    ];
 
-      if (keyCode === 13 || keyCode === 40) {
-        currRow += 1;
-      }
+    const {key, shiftKey} = event;
 
-      if (keyCode === 38) {
-        currRow -= 1;
-      }
+    if (keys.includes(key) && !shiftKey) {
+      event.preventDefault();
 
-      if (keyCode === 9 || keyCode === 39) {
-        currCol += 1;
-      }
+      const id = this.tableSelection.current.id(true);
+      const $targetCell = this.$root.find(nextSelector(key, id));
 
-      if (keyCode === 37) {
-        currCol -= 1;
-      }
-
-      const $targetCell = this.$root
-          .find(`[data-id="${currRow}:${currCol}"]`);
       if ($targetCell.$el) {
         this.tableSelection.select($targetCell);
       }
     }
   }
-}
-
+} // class Table
 
 // 680 ms  Scripting
 // 608 ms  Rendering

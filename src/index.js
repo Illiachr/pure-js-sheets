@@ -1,8 +1,8 @@
-import Sheets from '@/components/sheets/sheets';
-import Header from '@/components/header/Header';
-import Toolbar from '@/components/toolbar/Toolbar';
-import Formula from '@/components/formula/Formula';
-import Table from '@/components/table/Table';
+import Sheets from '@/components/Sheets/Sheets';
+import Header from '@/components/Header/Header';
+import Toolbar from '@/components/Toolbar/Toolbar';
+import Formula from '@/components/Formula/Formula';
+import Table from '@/components/Table/Table';
 import './scss/style.scss';
 
 const sheets = new Sheets('#app', {

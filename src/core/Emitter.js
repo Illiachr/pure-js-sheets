@@ -17,7 +17,7 @@ export default class Emitter {
   // Подписывает на уведомления
   // Добавляет нового слушателя
   // formula.subscribe('table:select', () => {})
-  subcribe(event, fn) {
+  subscribe(event, fn) {
     this.listeners[event] = this.listeners[event] || [];
     this.listeners[event].push(fn);
     // метод возвращает функцию отписки от события
