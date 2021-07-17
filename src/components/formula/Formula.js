@@ -14,36 +14,34 @@ export default class Formula extends SheetComponent {
 
   init() {
     super.init();
-    this.inputElem = $('.formula-input');
-    console.log(this.inputElem);
-    this.$on('cell:input', text => {
-      this.inputElem.text(text);
+    this.formulaInput = this.$root.find('#formula');
+    this.$on('cell:input', $cell => {
+      this.formulaInput.text($cell.text());
     });
 
-    this.$on('cell:new', text => {
-      this.inputElem.text(text);
+    this.$on('cell:next', $cell => {
+      this.formulaInput.text($cell.text());
     });
   }
 
   toHTML() {
     return `
       <div class="formula-info">fx</div>
-      <div class="formula-input" contenteditable="true" spellcheck="false">
+      <div id="formula" class="formula-input"
+      contenteditable="true" spellcheck="false">
       </div>
     `;
   }
 
-  onInput(event) {
-    const {target} = event;
-    const text = target.textContent;
-    this.$emit('formula:input', text);
+  onInput(e) {
+    this.$emit('formula:input', $(e.target).text());
   }
 
   onKeydown(e) {
-    const {key} = e;
-    if (key === 'Enter') {
+    const keys = ['Enter', 'Tab'];
+    if (keys.includes(e.key)) {
       e.preventDefault();
-      this.$emit('formula:end', null);
+      this.$emit('formula:end');
     }
   }
 

@@ -9,7 +9,7 @@ class Dom {
   html(html) {
     if (typeof html === 'string') {
       this.$el.innerHTML = html;
-      return this; // возвращаем this чтобы можно было делать chain
+      return this;
     }
 
     return this.$el.outerHTML.trim();
@@ -18,8 +18,13 @@ class Dom {
   text(text) {
     if (typeof text === 'string') {
       this.$el.textContent = text;
+      return this;
     }
-    return this.$el.textContent;
+
+    if (this.$el.tagName.toLowerCase() === 'input') {
+      return this.$el.value.trim();
+    }
+    return this.$el.textContent.trim();
   }
 
   clear() {
@@ -61,10 +66,12 @@ class Dom {
 
   addClass(className) {
     this.$el.classList.add(className);
+    return this;
   }
 
   rmClass(className) {
     this.$el.classList.remove(className);
+    return this;
   }
 
   find(selector) {

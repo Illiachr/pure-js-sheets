@@ -23,8 +23,7 @@ export default class Table extends SheetComponent {
 
   init() {
     super.init();
-    const $cell = this.$root.find('[data-id="0:0"]');
-    this.tableSelection.select($cell);
+    this.selectCell(this.$root.find('[data-id="0:0"]'));
     this.$on('formula:input', text => {
       this.tableSelection.current.text(text);
     });
@@ -37,9 +36,14 @@ export default class Table extends SheetComponent {
     return createTable();
   }
 
+  selectCell($cell) {
+    this.tableSelection.select($cell);
+    this.$emit('cell:next', $cell);
+  }
+
   onInput(e) {
-    const text = this.tableSelection.current.text();
-    this.$emit('cell:input', text);
+    // const text = this.tableSelection.current.text();
+    this.$emit('cell:input', $(e.target));
   }
 
   onMousedown(event) {
@@ -54,7 +58,7 @@ export default class Table extends SheetComponent {
       } else {
         // single selection
         this.tableSelection.select($cell);
-        this.$emit('cell:new', $cell.text());
+        this.$emit('cell:next', $cell);
       }
     }
     if (isResizable(event)) {
@@ -81,8 +85,7 @@ export default class Table extends SheetComponent {
       const $targetCell = this.$root.find(nextSelector(key, id));
 
       if ($targetCell.$el) {
-        this.tableSelection.select($targetCell);
-        this.$emit('cell:new', $targetCell.text());
+        this.selectCell($targetCell);
       }
     }
   }
