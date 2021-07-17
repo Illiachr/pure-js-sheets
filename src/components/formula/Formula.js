@@ -1,4 +1,5 @@
 import SheetComponent from '@core/SheetComponent';
+import {$} from '../../core/dom';
 
 export default class Formula extends SheetComponent {
   static className = 'excel__formula';
@@ -8,6 +9,19 @@ export default class Formula extends SheetComponent {
       name: 'Formula',
       listeners: ['input', 'click', 'keydown'],
       ...options
+    });
+  }
+
+  init() {
+    super.init();
+    this.inputElem = $('.formula-input');
+    console.log(this.inputElem);
+    this.$on('cell:input', text => {
+      this.inputElem.text(text);
+    });
+
+    this.$on('cell:new', text => {
+      this.inputElem.text(text);
     });
   }
 
@@ -33,7 +47,7 @@ export default class Formula extends SheetComponent {
     }
   }
 
-  onClick(event) {
-    console.log('Formula: onClick');
+  onClick(e) {
+    console.log('Formula: onClick', e);
   }
 }

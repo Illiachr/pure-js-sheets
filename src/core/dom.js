@@ -16,7 +16,10 @@ class Dom {
   }
 
   text(text) {
-    this.$el.textContent = text;
+    if (typeof text === 'string') {
+      this.$el.textContent = text;
+    }
+    return this.$el.textContent;
   }
 
   clear() {

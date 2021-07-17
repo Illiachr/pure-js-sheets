@@ -12,7 +12,7 @@ export default class Table extends SheetComponent {
   constructor($root, options) {
     super($root, {
       name: 'Table',
-      listeners: ['mousedown', 'keydown'],
+      listeners: ['mousedown', 'keydown', 'input', 'change'],
       ...options
     });
   }
@@ -38,6 +38,15 @@ export default class Table extends SheetComponent {
     return createTable();
   }
 
+  onInput(e) {
+    const text = this.tableSelection.current.text();
+    this.$emit('cell:input', text);
+  }
+
+  onChange(e) {
+    console.log(e.type, e.target);
+  }
+
   onMousedown(event) {
     if (isCell(event)) {
       const $cell = $(event.target);
@@ -50,6 +59,7 @@ export default class Table extends SheetComponent {
       } else {
         // single selection
         this.tableSelection.select($cell);
+        this.$emit('cell:new', $cell.text());
       }
     }
     if (isResizable(event)) {
@@ -77,6 +87,7 @@ export default class Table extends SheetComponent {
 
       if ($targetCell.$el) {
         this.tableSelection.select($targetCell);
+        this.$emit('cell:new', $targetCell.text());
       }
     }
   }
