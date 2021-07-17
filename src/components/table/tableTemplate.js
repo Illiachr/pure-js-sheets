@@ -3,8 +3,17 @@ const CODE = {
   Z: 90,
 };
 
-function toCell(_, index) {
-  return `<div class="cell" data-col="${index}" contenteditable></div>`;
+function toCell(row) {
+  return function addCell(_, col) {
+    return `<div 
+            class="cell" 
+            data-type="cell" 
+            data-col="${col}" 
+            data-id="${row}:${col}" 
+            contenteditable
+          >
+          </div>`;
+  };
 }
 
 function toCol(col, index) {
@@ -48,12 +57,12 @@ export function createTable(rowNum = 20) {
       .map(toCol)
       .join('');
   rows.push(createRow(cols));
-  for (let i = 1; i <= rowNum; i++) {
+  for (let row = 0; row < rowNum; row++) {
     const cells = new Array(colCount)
         .fill('')
-        .map(toCell)
+        .map(toCell(row))
         .join('');
-    rows.push(createRow(cells, i));
+    rows.push(createRow(cells, row + 1));
   }
 
   return rows.join('');

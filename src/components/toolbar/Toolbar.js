@@ -4,10 +4,11 @@ import SheetComponent from '@core/SheetComponent';
 export default class Toolbar extends SheetComponent {
   static className = 'excel__tollbar';
 
-  constructor($root) {
+  constructor($root, options) {
     super($root, {
       name: 'Toolbar',
-      listeners: ['click']
+      listeners: ['click'],
+      ...options
     });
   }
 

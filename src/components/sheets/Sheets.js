@@ -1,16 +1,24 @@
 import {$} from '@core/dom';
+import Emitter from '@core/Emitter';
 
 export default class Sheets {
   constructor(selector, options) {
     this.$el = $(selector);
     this.components = options.components || [];
+    this.emitter = new Emitter();
   }
 
   getRoot() {
     const $root = $.create('div', 'excel');
+
+    const componentOptions = {
+      emitter: this.emitter
+    };
+
     this.components = this.components.map(Component => {
       const $el = $.create('div', Component.className);
-      const component = new Component($el);
+      const component = new Component($el, componentOptions);
+      console.log(component);
       $el.html(component.toHTML());
       $root.append($el);
       return component;
@@ -28,7 +36,6 @@ export default class Sheets {
 
   destroy() {
     this.components.forEach(component => {
-      console.log(component);
       component.destruct();
     });
   }

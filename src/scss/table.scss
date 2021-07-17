@@ -9,6 +9,11 @@
   overflow-x: auto;
   padding-bottom: 2px;
 
+  & .table-row,
+  & .tale-col {
+    user-select: none;
+  }
+
   & .table-row {
     display: flex;
     min-width: 20px;
