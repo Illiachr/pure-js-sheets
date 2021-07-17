@@ -12,7 +12,7 @@ export default class Table extends SheetComponent {
   constructor($root, options) {
     super($root, {
       name: 'Table',
-      listeners: ['mousedown', 'keydown', 'input', 'change'],
+      listeners: ['mousedown', 'keydown', 'input'],
       ...options
     });
   }
@@ -30,7 +30,6 @@ export default class Table extends SheetComponent {
     });
     this.$on('formula:end', () => {
       this.tableSelection.current.focus();
-      console.log(this.tableSelection.current);
     });
   }
 
@@ -41,10 +40,6 @@ export default class Table extends SheetComponent {
   onInput(e) {
     const text = this.tableSelection.current.text();
     this.$emit('cell:input', text);
-  }
-
-  onChange(e) {
-    console.log(e.type, e.target);
   }
 
   onMousedown(event) {
