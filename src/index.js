@@ -9,7 +9,7 @@ import rootReducer from './store/rootReducer';
 import Store from './core/Store';
 
 // const store = createStore(rootReducer, {});
-const store = new Store(rootReducer, {tableMsg: 'Welcome from Store!'});
+const store = new Store(rootReducer, {});
 console.warn(store);
 
 const sheets = new Sheets('#app', {

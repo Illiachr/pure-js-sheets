@@ -7,6 +7,7 @@ export default class SheetComponent extends DomListener {
     this.emitter = options.emitter;
     this.store = options.store;
     this.unsubscribers = [];
+    this.unSub = null;
 
     this.prepare();
   }
@@ -33,8 +34,17 @@ export default class SheetComponent extends DomListener {
     this.unsubscribers.push(unsub);
   }
 
+  $dispatch(action) {
+    this.store.dispatch(action);
+  }
+
+  $subscribe(fn) {
+    this.unSub = this.store.subscribe(fn);
+  }
+
   destruct() {
     this.removeDOMListeners();
     this.unsubscribers.forEach(unsub => unsub());
+    this.unSub.unsub();
   }
 }

@@ -30,6 +30,7 @@ export default class Table extends SheetComponent {
     this.$on('formula:end', () => {
       this.tableSelection.current.focus();
     });
+    this.$subscribe(state => console.warn(state));
   }
 
   toHTML() {
@@ -42,7 +43,6 @@ export default class Table extends SheetComponent {
   }
 
   onInput(e) {
-    // const text = this.tableSelection.current.text();
     this.$emit('cell:input', $(e.target));
   }
 
@@ -57,7 +57,7 @@ export default class Table extends SheetComponent {
         this.tableSelection.selectGroup(cellSelect);
       } else {
         // single selection
-        this.tableSelection.select($cell);
+        this.selectCell($cell);
         this.$emit('cell:next', $cell);
       }
     }
