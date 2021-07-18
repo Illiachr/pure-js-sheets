@@ -38,7 +38,7 @@ export default class Toolbar extends SheetComponent {
   onClick(event) {
     const {target} = event;
     if (target.closest('span')) {
-      console.log('Toolbar', target);
+      // console.log('Toolbar', target);
     }
   }
 }
