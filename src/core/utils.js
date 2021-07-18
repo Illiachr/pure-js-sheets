@@ -35,3 +35,14 @@ export function nextSelector(key, {row, col}) {
   }
   return `[data-id="${row}:${col}"]`;
 }
+
+export function storeLocal(key, data) {
+  if (!data) {
+    try {
+      return JSON.parse(localStorage.getItem(key));
+    } catch (err) {
+      console.warn(err);
+    }
+  }
+  localStorage.setItem(key, JSON.stringify(data));
+}

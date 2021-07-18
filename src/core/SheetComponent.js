@@ -42,6 +42,10 @@ export default class SheetComponent extends DomListener {
     this.unSub = this.store.subscribe(fn);
   }
 
+  $getState() {
+    return this.store.getState();
+  }
+
   destruct() {
     this.removeDOMListeners();
     this.unsubscribers.forEach(unsub => unsub());

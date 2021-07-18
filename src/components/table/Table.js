@@ -5,6 +5,7 @@ import TableSelection from './TableSelection';
 import {createTable} from './tableTemplate';
 import {$} from '@core/dom';
 import {nextSelector} from '@core/utils';
+import {tableResize} from '@store/actions';
 
 export default class Table extends SheetComponent {
   static className = 'excel__table';
@@ -23,6 +24,7 @@ export default class Table extends SheetComponent {
 
   init() {
     super.init();
+    this.initialResize();
     this.selectCell(this.$root.find('[data-id="0:0"]'));
     this.$on('formula:input', text => {
       this.tableSelection.current.text(text);
@@ -30,11 +32,25 @@ export default class Table extends SheetComponent {
     this.$on('formula:end', () => {
       this.tableSelection.current.focus();
     });
-    this.$subscribe(state => console.warn(state));
+    // this.$subscribe(state => console.warn(state));
   }
 
   toHTML() {
     return createTable();
+  }
+
+  initialResize() {
+    const state = this.$getState();
+    const {colState} = state;
+    const colIds = Object.keys(colState);
+    colIds.forEach(
+        colId => {
+          const $cells = this.$root.findAll(`[data-col="${colId}"]`);
+          $cells.forEach(cell => {
+            cell.style.cssText = `width: ${colState[colId]}px`;
+          });
+        }
+    );
   }
 
   selectCell($cell) {
@@ -46,12 +62,20 @@ export default class Table extends SheetComponent {
     this.$emit('cell:input', $(e.target));
   }
 
+  async resizeTable(e) {
+    try {
+      const data = await resizeHandler(this.$root, e.target);
+      this.$dispatch(tableResize(data));
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   onMousedown(event) {
     if (isCell(event)) {
       const $cell = $(event.target);
       if (event.shiftKey) {
         // group selection
-
         const cellSelect = matrix(this.tableSelection.current, $(event.target))
             .map(id => this.$root.find(`[data-id="${id}"]`));
         this.tableSelection.selectGroup(cellSelect);
@@ -62,7 +86,8 @@ export default class Table extends SheetComponent {
       }
     }
     if (isResizable(event)) {
-      resizeHandler(this.$root, event.target);
+      this.resizeTable(event);
+      // resizeHandler(this.$root, event.target);
     }
   }
 

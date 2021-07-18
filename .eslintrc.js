@@ -18,6 +18,6 @@ module.exports = {
       'error',
       'windows'
     ],
-    'no-console': ['error', {allow: ['warn']}]
+    'no-console': ['warn', {allow: ['warn']}]
   },
 };
