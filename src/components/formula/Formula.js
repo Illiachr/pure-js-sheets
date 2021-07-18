@@ -46,6 +46,6 @@ export default class Formula extends SheetComponent {
   }
 
   onClick(e) {
-    console.log('Formula: onClick', e);
+    console.warn('Formula: onClick', e);
   }
 }

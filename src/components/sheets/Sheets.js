@@ -18,7 +18,6 @@ export default class Sheets {
     this.components = this.components.map(Component => {
       const $el = $.create('div', Component.className);
       const component = new Component($el, componentOptions);
-      console.log(component);
       $el.html(component.toHTML());
       $root.append($el);
       return component;
